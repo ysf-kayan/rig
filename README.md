@@ -7,13 +7,13 @@ wait a few minutes before accessing to endpoints. It can take some time to start
 
 * `1-Architecture.png` shows initial architectural design of the application. Note that the logging service is not implemented.
 
-Application is designed as a microservice based application with "eventually consistent" database pattern. Spring Boot is the base framework of application. Services run on default Tomcat server. Every service is designed to have it's own database, but in the docker file i've used same database container for all services. Services use their own table(s) and never access others'.
-Saga pattern used to accomplish database consistency. Gateway pattern is used for authentication and request routing.
-Some controller methods and tests are not implemented because of time constraints.
-Application is developed using Java 11.
-PostgreSql database system is used. Database access is achieved using spring-data-jpa lib.
-RabbitMq used to implement messaging between different services. 
-Lombok library used to make create boilerplate code easier.
+* Application is designed as a microservice based application with "eventually consistent" database pattern. Spring Boot is the base framework of application. Services run on default Tomcat server. Every service is designed to have it's own database, but in the docker file i've used same database container for all services. Services use their own table(s) and never access others'.
+* Saga pattern used to accomplish database consistency. Gateway pattern is used for authentication and request routing.
+* Some controller methods and tests are not implemented because of time constraints.
+* Application is developed using Java 11.
+* PostgreSql database system is used. Database access is achieved using spring-data-jpa lib.
+* RabbitMq used to implement messaging between different services. 
+* Lombok library used to make create boilerplate code easier.
 
 
 Below is the usage information about endpoints.
