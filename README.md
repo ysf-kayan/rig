@@ -3,9 +3,9 @@
 * You can use `docs/2-docker-compose.yml` compose file to start the application. When you start the compose file
 wait a few minutes before accessing to endpoints. It can take some time to start all the services. (It takes on my pc:)
 
-* After you have started the application and waited a few minutes, you can import `3-Example Scenario.postman_collection.json` into Postman and start testing endpoints. Requests are named and ordered. Please remember to add auth token to the requests after login request.
+* After you have started the application and waited a few minutes, you can import `docs/3-Example Scenario.postman_collection.json` into Postman and start testing endpoints. Requests are named and ordered. Please remember to add auth token to the requests after login request.
 
-* `1-Architecture.png` shows initial architectural design of the application. Note that the logging service is not implemented.
+* `docs/1-Architecture.png` shows initial architectural design of the application. Note that the logging service is not implemented.
 
 * Application is designed as a microservice based application with "eventually consistent" database pattern. Spring Boot is the base framework of application. Services run on default Tomcat server. Every service is designed to have it's own database, but in the docker file i've used same database container for all services. Services use their own table(s) and never access others'.
 * Choreography based saga pattern used to accomplish database consistency. Gateway pattern is used for authentication and request routing.
