@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  spring-rabbitmq:
+  rabbitmq:
     image: rabbitmq:3-management
     ports:
       - '5672:5672'
@@ -16,3 +16,57 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - 5432:5432
+
+  book-service:
+    image: ysfkayan/images:book-service
+    restart: always
+    ports:
+      - '4244:4244'
+    depends_on:
+      - db
+      - rabbitmq
+    links:
+      - db
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_RABBITMQ_HOST=rabbitmq
+
+  order-service:
+    image: ysfkayan/images:order-service
+    restart: always
+    ports:
+      - '4242:4242'
+    depends_on:
+      - db
+      - rabbitmq
+    links:
+      - db
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_RABBITMQ_HOST=rabbitmq
+
+  gateway-service:
+    image: ysfkayan/images:gateway-service
+    restart: always
+    ports:
+      - '8080:8080'
+    links:
+      - book-service
+      - order-service
+      - customer-service
+    environment:
+      - GS_BOOK-SERVICE_HOST=book-service
+      - GS_ORDER-SERVICE_HOST=order-service
+      - GS_CUSTOMER-SERVICE_HOST=customer-service
+
+  customer-service:
+    image: ysfkayan/images:customer-service
+    restart: always
+    ports:
+      - '4243:4243'
+    links:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
