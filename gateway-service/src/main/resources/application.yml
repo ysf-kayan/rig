@@ -1,0 +1,9 @@
+server:
+  port: 8080
+gs:
+  book-service:
+    host: localhost
+  order-service:
+    host: localhost
+  customer-service:
+    host: localhost
