@@ -1,0 +1,15 @@
+server:
+  port: 4243
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+cs:
+  secret-key: the_cake_is_a_lie
