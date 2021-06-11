@@ -1,0 +1,31 @@
+server:
+  port: 4242
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+bs:
+  order:
+    exchange:
+      name: order-exchange
+  order_created:
+    queue:
+      name: order-created-queue
+  order_approved:
+    queue:
+      name: order-approved-queue
+  order_rejected:
+    queue:
+      name: order-rejected-queue
